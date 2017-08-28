@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+    All Users
+{% endblock title %}
+
+{% block body %}
+
+
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span> {% trans 'User' %}</span></th>
+                                <th><span>{% trans 'Joined us' %}</span></th>
+                                <th><span>{% trans 'Email'%}</span></th>
+                                <th><span>{% trans 'Rating' %}</span></th>
+                                <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for author in object_list %}
+                                <tr>
+                                    <td>
+                                        <img width="30" src="{{ author.get_picture }}" >
+                                        <a href="{% url 'profiles:show_profile' pk=author.id %}" class="user-link">{{ author.user }} </a>
+                                    </td>
+
+                                    <td>{{ author.user.date_joined.date }}</td>
+
+
+                                    <td>
+                                        <a href="mailto:{{ author.email }}">{{ author.email }}</a>
+                                    </td>
+                                    <td>
+                                       {{ author.rating }}
+                                    </td>
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 col-xs-3 col-lg-3">
+            {% include 'blogs/embed/user_small_panel.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

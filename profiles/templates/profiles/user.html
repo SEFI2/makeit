@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock title %}
+
+{% block body %}
+  <div class="container">
+      <div class="row">
+      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+
+      </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+
+
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{ profile.user }}</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+
+
+                <div class=" col-md-3 col-lg-3 ">
+                    <img  width="70" src="{{ profile.get_picture }}"/>
+                </div>
+
+
+                <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td><strong>Name</strong> </td>
+                        <td>{{ profile.get_full_name }} </td>
+                      </tr>
+                      <tr>
+                          <td><strong>Join date</strong></td>
+                        <td>{{ profile.user.date_joined }}</td>
+                      </tr>
+                      <tr>
+                        <td> <strong>Rating</strong> </td>
+                        <td> 132 </td>
+                      </tr>
+
+                         <tr>
+                             <tr>
+                        <td><strong>Skills</strong></td>
+                        <td>{{ profile.skills }}</td>
+                      </tr>
+                        <tr>
+                        <td><strong>Location</strong></td>
+                        <td>{{ profile.location }}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Email</strong></td>
+                        <td><a href="mailto:{{ profile.email }}">{{ profile.email }}</a></td>
+                      </tr>
+
+
+                      </tr>
+
+                    </tbody>
+                  </table>
+
+                  <a href="#" class="btn btn-primary">My Conversations</a>
+                  <a href="#" class="btn btn-primary">My Blogs</a>
+                </div>
+              </div>
+            </div>
+                 <div class="panel-footer">
+                            {% if request.user.is_authenticated and request.user.id == profile.user.id %}
+                                <a href="{% url 'profiles:update_profile' pk=profile.pk %}" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            {% else %}
+                                <a href="{% url 'messenger:messages' username=profile.user.username %}" data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                            {% endif %}
+                 </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock body %}

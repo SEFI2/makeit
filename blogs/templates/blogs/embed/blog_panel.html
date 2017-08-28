@@ -1,0 +1,33 @@
+<div class="panel panel-group">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div>
+
+                <a href="{% url 'blogs:activity' article_type='blog' activity_type='U' pk=blog.id %}"><strong><i class="fa fa-thumbs-up"></i></strong></a>
+
+                {{ blog.up_votes }}
+                                &nbsp;
+                <a href="{% url 'blogs:activity' article_type='blog' activity_type='D' pk=blog.id %}">
+                    <strong><i class="fa fa-thumbs-down"></i></strong>
+                </a>
+
+                {{ blog.down_votes }}
+                <div class="pull-right">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <strong class="blog-post-meta"> {{ blog.create_date.date }} by
+                    <a href="{% url 'profiles:show_profile' pk=blog.author.profile.id %}">
+                        {{ blog.author }}
+                    </a>
+                </strong>
+                &nbsp; &nbsp;
+
+                <a href="{% url 'blogs:activity' article_type='blog' activity_type='F' pk=blog.id %}">
+                    <strong><i class="fa fa-star"></i></strong>
+                </a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

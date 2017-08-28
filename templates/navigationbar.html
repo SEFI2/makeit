@@ -1,0 +1,60 @@
+{% load i18n %}
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{% url 'blogs:all_blogs' %}">
+                       {% trans 'Home' %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'profiles:all_users' %}">
+                        USERS
+                    </a>
+                </li>
+
+                {% if not request.user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'profiles:login' %}">
+                            LOGIN
+                        </a>
+                    </li>
+                    <li>
+
+                        <a href="{% url 'profiles:sign_up' %}">
+                            SIGNUP
+                        </a>
+                    </li>
+
+                {% else %}
+                    <li>
+                        <a href="{% url 'profiles:show_profile' pk=request.user.profile.pk %}">
+                            {{ request.user.username.upper }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'profiles:logout' %}">
+                            LOGOUT
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blogs:create_blog' %}">
+                            POST
+                        </a>
+                    </li>
+                {% endif %}
+
+
+
+
+
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+

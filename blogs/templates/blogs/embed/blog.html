@@ -1,0 +1,16 @@
+<div class="blog-post">
+    <a href="{% url 'blogs:blog_look' pk=blog.pk %}">
+        <h2 class="blog-post-title">
+            {{ blog.title }}
+        </h2>
+    </a>
+
+    <p>
+        <blockquote>
+            {{ blog_content|safe }}
+        </blockquote>
+    </p>
+
+    {% include 'blogs/embed/blog_panel.html' %}
+</div>
+

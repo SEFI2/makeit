@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+
+{% block title %}
+    Messages
+{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'messenger/messenger_panel.css' %}"/>
+{% endblock %}
+
+{% block body %}
+
+<div class="main_section">
+   <div class="container">
+      <div class="chat_container">
+
+
+         <div class="col-sm-9 message_section">
+		 <div class="row">
+                 <div class="new_message_head">
+
+                <div class="pull-right"><div class="dropdown">
+            <i class="fa fa-cogs" aria-hidden="true"></i>  Setting
+            <span class="caret"></span>
+
+
+
+
+        </div></div>
+		 </div><!--new_message_head-->
+
+		 <div class="chat_area">
+		 <ul class="list-unstyled">
+             {% for message in messages %}
+                 {% if message.from_user == request.user %}
+                      <li class="left clearfix">
+                    <span class="chat-img1 pull-left">
+                     <img src="{{ message.from_user.profile.avatar.url }}" alt="User Avatar" class="img-circle">
+                     </span>
+                     <div class="chat-body1 clearfix">
+                        <p>{{ message.message }}</p>
+						<div class="chat_time pull-right">{{ message.date.date }}</div>
+                     </div>
+                  </li>
+                 {% else %}
+                     <li class="left clearfix admin_chat">
+                     <span class="chat-img1 pull-right">
+                     <img src="{{ message.from_user.profile.avatar.url }}" alt="User Avatar" class="img-circle">
+                     </span>
+                     <div class="chat-body1 clearfix">
+                        <p>{{ message.message }}</p>
+    					<div class="chat_time pull-left">{{ message.date.date }}</div>
+                     </div>
+                  </li>
+                 {% endif %}
+
+
+
+
+                {% endfor %}
+
+
+
+		 </ul>
+		 </div><!--chat_area-->
+          <div class="message_write">
+              <form method="post">
+{% csrf_token %}
+    	 <textarea name='message' class="form-control" placeholder="type a message"></textarea>
+		 <div class="clearfix"></div>
+ <button href="#" class="pull-right btn btn-success">Send</button>
+              </form>
+		 </div>
+		 </div>
+         </div> <!--message_section-->
+      </div>
+   </div>
+</div>
+
+{% endblock body %}

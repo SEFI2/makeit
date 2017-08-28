@@ -1,0 +1,12 @@
+<div class="user-profile">
+                            <h3>
+                                {{ request.user|upper }}
+
+                            </h3>
+                            <h5>
+                               <span class="glyphicon glyphicon-star"></span> Rating: +112
+                            </h5>
+                            {{ request.user.profile.get_full_name }}
+
+
+</div>

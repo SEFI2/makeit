@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+
+{% block title %}
+    Recent posts
+{% endblock title %}
+
+{% block body %}
+    <style>
+        .blog-post{
+             padding-top:10px;
+        }
+
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9">
+                {% for blog in object_list %}
+                    {% include 'blogs/embed/blog.html' with blog_content=blog.get_content%}
+                {% endfor %}
+            </div>
+
+            {% if request.user.is_authenticated %}
+                <div class="col-xs-3 col-sm-3">
+                    {% include 'blogs/embed/user_small_panel.html' %}
+                </div>
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+{% endblock body %}

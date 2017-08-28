@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+    {{ blog.pk }}
+{% endblock title %}
+
+{% block body %}
+    <div class="row content">
+
+    <div class="col-xs-12 col-md-9">
+    {% include 'blogs/embed/blog.html' with blog_content=blog.get_content%}
+    </div>
+    <div class="col-xs-3 col-md-3">
+        {% include 'blogs/embed/user_small_panel.html' %}
+    </div>
+
+    <div class="col-xs-12 col-md-9">
+        {% if request.user == blog.author %}
+            <form action="{% url 'blogs:edit_blog' pk=blog.id %}">
+                <input class="btn btn-primary pull-left" type="submit" value="{% trans 'Edit' %}"/>
+            </form>
+
+            <form action="{% url 'blogs:edit_blog' pk=blog.id %}">
+                <input class="btn btn-danger" type="submit" value="{% trans 'Delete' %}"/>
+            </form>
+        {% endif %}
+    </div>
+
+
+
+
+
+     <div class="col-xs-9 col-md-9">
+         <hr>
+
+        {% if request.user.is_authenticated %}
+            <form method="post">
+              {% csrf_token %}
+               <textarea class="form-control"  name="comment"></textarea>
+               <button class="btn btn-success">comment</button>
+            </form>
+        {% endif %}
+
+        <br>
+
+    </div>
+</div>
+
+        {% for comment in blog.get_comments %}
+            <div class="row">
+
+
+            <div class="col-sm-1">
+<div class="thumbnail">
+<img class="img-responsive user-photo" src="{{ comment.user.profile.get_picture }}">
+</div><!-- /thumbnail -->
+</div><!-- /col-sm-1 -->
+
+<div class="col-sm-8">
+<div class="panel panel-default">
+<div class="panel-heading">
+<strong><a href="{% url 'profiles:show_profile' pk=comment.user.profile.pk %}">{{ comment.user }}</a></strong> <span class="text-muted">{{ comment.date }}</span>
+                               <a href="{% url 'blogs:activity' article_type='blog_comment' activity_type='U' pk=comment.id %}"><strong><i class="fa fa-thumbs-up"></i></strong></a>
+                                <comment>{{ comment.up_votes }}</comment>
+                                <a href="{% url 'blogs:activity' article_type='blog_comment' activity_type='D' pk=comment.id %}"><strong><i class="fa fa-thumbs-down"></i></strong></a>
+                                <comment>{{ comment.down_votes }}</comment>
+                                <a href="{% url 'blogs:activity' article_type='blog_comment' activity_type='F' pk=comment.id %}"><strong><i class="fa fa-star"></i></strong></a>
+
+</div>
+<div class="panel-body">
+{{ comment.comment }}
+
+</div><!-- /panel-body -->
+</div><!-- /panel panel-default -->
+</div><!-- /col-sm-5 -->
+
+</div>
+        {% endfor %}
+
+
+
+
+{% endblock body %}
