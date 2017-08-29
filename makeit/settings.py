@@ -139,6 +139,12 @@ LANGUAGES = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+
+CKEDITOR_JQUERY_URL = 'http://libs.baidu.com/jquery/2.0.3/jquery.min.js'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_UPLOAD_SLUGIFY_FILENAME = True
+CKEDITOR_UPLOAD_PATH = "ckeditor_photos/"
+
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Custom',
@@ -152,5 +158,5 @@ CKEDITOR_CONFIGS = {
         ]
     }
 }
-CKEDITOR_UPLOAD_PATH = '/static'
+
 
