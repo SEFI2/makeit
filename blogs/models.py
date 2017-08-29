@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 import markdown
 from django.core.urlresolvers import reverse
-from ckeditor.fields import RichTextField
 
+
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 
@@ -14,7 +15,7 @@ class Blog(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255)
-    content = RichTextField()
+    content = RichTextUploadingField()
 
     class Meta:
         verbose_name = _("Blog")

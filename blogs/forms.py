@@ -1,6 +1,6 @@
 from django import forms
 from .models import Blog
-from ckeditor.widgets import CKEditorWidget
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class BlogForm(forms.ModelForm):
     title = forms.CharField(
@@ -8,7 +8,7 @@ class BlogForm(forms.ModelForm):
         max_length=255
     )
     content = forms.CharField(
-        widget=CKEditorWidget(),
+        widget=CKEditorUploadingWidget(),
         max_length=4000
     )
     class Meta:

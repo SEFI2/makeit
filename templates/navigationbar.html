@@ -5,6 +5,7 @@
         <div>
 
             <ul class="nav navbar-nav navbar-right">
+            {% comment %}
                 <li>
                     <a href="{% url 'blogs:all_blogs' %}">
                        {% trans 'Home' %}
@@ -40,12 +41,13 @@
                             LOGOUT
                         </a>
                     </li>
+                {% endif %}
+                    {% endcomment %}
                     <li>
                         <a href="{% url 'blogs:create_blog' %}">
                             POST
                         </a>
                     </li>
-                {% endif %}
 
 
 
